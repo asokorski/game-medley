@@ -1,26 +1,31 @@
-import random
+from guess_the_number import guess_the_number
 
-# def guess(x):
-#     random_number = random.randint(1, x)
+print("""
+ _    _                                 _                                                 ___  
+| |  | |                               | |                                               |__ \ 
+| |  | | __ _ _ __  _ __   __ _   _ __ | | __ _ _   _    __ _    __ _  __ _ _ __ ___   ___  ) |
+| |/\| |/ _` | '_ \| '_ \ / _` | | '_ \| |/ _` | | | |  / _` |  / _` |/ _` | '_ ` _ \ / _ \/ / 
+\  /\  / (_| | | | | | | | (_| | | |_) | | (_| | |_| | | (_| | | (_| | (_| | | | | | |  __/_|  
+ \/  \/ \__,_|_| |_|_| |_|\__,_| | .__/|_|\__,_|\__, |  \__,_|  \__, |\__,_|_| |_| |_|\___(_)  
+                                 | |             __/ |           __/ |                         
+                                 |_|            |___/           |___/                          
+      """)
 
-def guess(x):
-    random_number = random.randint(1, 999)
-    while True:
-        if int(guess) == random_number:
-            print("You got it!")
-            break
-        elif int(guess) > random_number:
-            print("Too high!")
-        elif int(guess) < random_number:
-            print("Too low!")
+print("Welcome to the console game medley hub!")
+print("")
+
+while True:
+    print("""Please choose a game from the list:
+        0 - Close the program
+        1 - Guess the number
+        """)
+    game = input("I want to play a game number... ")
+    if game == "0":
+        print("See you next time!")
+        break
+    elif game == "1":
+        print("")
+        guess_the_number()
 
 
-decision = input("Wanna play a game? ")
-if decision == "no":
-    print("Well, ok")
-elif decision == "yes":
-    print("MUAHAHAHA")
-    number_guess = input("Guess the number... ")
-    guess(int(number_guess))
-else:
-    print("Speak human")
+# to be fixed - gets error when "up to what number" and "guess number" is not intiger
