@@ -14,7 +14,7 @@ def guess_the_number():
             try:
                 int(x)
                 break
-            except:
+            except ValueError:
                 print(">Please enter a valid integer number")
         print(f">The range for the numbers to guess is between 1 and {x}")
         print(">Let me think about a number...")
@@ -27,7 +27,7 @@ def guess_the_number():
                 try:
                     int(guess)
                     break
-                except:
+                except ValueError:
                     print(">Please enter a valid integer number")
             guess = int(guess)
             if guess == random_num:
@@ -46,7 +46,7 @@ def guess_the_number():
             try:
                 int(x)
                 break
-            except:
+            except ValueError:
                 print(">Please enter a valid integer number")
         y = 1
         print(f">Your number is somewhere between {y} and {x}")
@@ -73,9 +73,15 @@ def guess_the_number():
                         guess_specify = input('>Please type "h" or "l": ').lower()
                 time.sleep(0.5)
                 if guess_specify == "h":
-                    y = int(guess) + 1
+                    if int(guess) + 1 < int(x):
+                        y = int(guess) + 1
+                    else:
+                        print("Cannot be that high...")
                 elif guess_specify == "l":
-                    x = int(guess) - 1
+                    if int(guess) - 1 > 1:
+                        x = int(guess) - 1
+                    else:
+                        print("Cannot be that low...")
         pass
     else:
         print("Type 1 or 2")

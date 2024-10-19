@@ -26,6 +26,3 @@ while True:
     elif game == "1":
         print("")
         guess_the_number()
-
-
-# to be fixed - gets error when "up to what number" and "guess number" is not intiger
