@@ -33,3 +33,4 @@ def guess_the_number():
     else:
         print("Type 1 or 2")
                       
+print('test')
