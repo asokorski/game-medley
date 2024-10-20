@@ -1,4 +1,4 @@
-from guess_the_number import guess_the_number
+from guess_the_number import guess_the_number, response_validation
 
 print("""
  _    _                                 _                                                 ___  

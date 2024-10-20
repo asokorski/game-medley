@@ -28,5 +28,4 @@
 
 
 
-a = str("DUPSKO".lower())
-print(a)
+what = int(input("Give me a number: "))

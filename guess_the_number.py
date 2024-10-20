@@ -1,6 +1,13 @@
 import random
 import time
 
+def response_validation(prompt, valid_responses):
+    while True:
+        answer = input(prompt).lower()
+        if answer in valid_responses:
+            return answer
+        else:
+            print(f"Please type one of the options: {valid_responses}")
 
 def guess_the_number():
     print(">Welcome to Guess the Number game. The rule is to guess the integer that the other side is thinking about.")
@@ -54,23 +61,13 @@ def guess_the_number():
             print(">Hmmm...")
             time.sleep(0.5)
             guess = random.randint(int(y), int(x))
-            answer = input(f">Is it {guess}? yes/no: ").lower()
-            while True:
-                if answer == "yes" or answer == "no":
-                    break
-                else:
-                    answer = input('>Please type "yes" or "no": ').lower()
+            answer = response_validation(f">Is it {guess}? yes/no: ", ['yes', 'no'])
             if answer == "yes":
                 print(">I got it!")
                 print("")
                 break
             elif answer == "no":
-                guess_specify = input(">Is it higher or lower? h/l: ").lower()
-                while True:
-                    if guess_specify == 'h' or guess_specify == 'l':
-                        break
-                    else:
-                        guess_specify = input('>Please type "h" or "l": ').lower()
+                guess_specify = response_validation(f">Is it higher or lower? h/l: ", ['h', 'l'])
                 time.sleep(0.5)
                 if guess_specify == "h":
                     if int(guess) + 1 < int(x):
