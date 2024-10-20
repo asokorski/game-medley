@@ -16,7 +16,7 @@ print("")
 
 while True:
     print("""Please choose a game from the list:
-        0 - Close the program
+        0 - Close the program]
         1 - Guess the number
         """)
     game = input("I want to play a game number... ")

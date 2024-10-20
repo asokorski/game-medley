@@ -28,6 +28,7 @@ def guess_the_number():
         random_num = random.randint(1, int(x))
         time.sleep(1)
         print(">Ok, got it!")
+        wrong_guesses = 0
         while True:
             while True:
                 guess = input(">What's your guess? ")
@@ -43,10 +44,17 @@ def guess_the_number():
                 break
             elif guess > random_num:
                 print(">That's too big!")
+                wrong_guesses += 1
             elif guess < random_num:
                 print(">That's too small!")
+                wrong_guesses += 1
             else:
                 print(f">Choose an integer between 1 and {x}")
+            if wrong_guesses == 5:
+                if guess > random_num:
+                    print("Hint: try something smaller!")
+                elif guess < random_num:
+                    print("Hint: try something higher!") 
     elif decision == str(2):
         while True:
             x = input(">Up to what number should I guess? ")
