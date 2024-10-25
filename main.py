@@ -1,4 +1,5 @@
-from guess_the_number import guess_the_number, response_validation
+from guess_the_number import guess_the_number
+from rock_paper_scissors import rock_paper_scissors
 
 print("""
  _    _                                 _                                                 ___  
@@ -18,6 +19,7 @@ while True:
     print("""Please choose a game from the list:
         0 - Close the program
         1 - Guess the number
+        2 - Rock, paper, scissors
         """)
     game = input("I want to play a game number... ")
     if game == "0":
@@ -26,3 +28,6 @@ while True:
     elif game == "1":
         print("")
         guess_the_number()
+    elif game == "2":
+        print("")
+        rock_paper_scissors()
