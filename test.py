@@ -1,16 +1,25 @@
 
+plain = "apple"
+hidden = ["_ _ _ _ _"]
+guessed = []
+display_word = ""
+incorrect_counter = 0
 
+while True:
+    guessed_letter = input("Guess the letter: ")
+    if guessed_letter in plain:
+        guessed.append(guessed_letter)
+    for letter in plain:
+        if letter in guessed:
+            display_word += ''.join(f"{letter} ")
+        else:
+            incorrect_counter += 1
+            display_word += ''.join("_ ")
+    print(display_word)
+    if display_word.replace(" ", "") == plain:
+        print(f'Congrats! You guessed the word "{plain}"! Incorrect guesses: {str(incorrect_counter)}')
+        break
+    else:
+        display_word = ""
 
-
-# word = ["a", "p", "p", "l", "e"]
-
-# actual_word = ''.join(word)
-# print(actual_word)
-
-
-word = "apple"
-hidden_word = []
-for letter in word:
-    hidden_word.append("_ ")
-hidden_word = ''.join(hidden_word)
-print(hidden_word)
+#incorrect counter doesnt work
