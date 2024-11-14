@@ -18,3 +18,9 @@ You can choose between the game modes:
 Best of 3
 Best of 5
 Best of 10
+
+
+
+## 2. Hangman
+You choose the length of a word and have 8 attempts to guess it. Program chooses a random word of that length from the dictionary.
+Each incorrect guess updates the picture of a hangman.
