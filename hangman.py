@@ -1,5 +1,55 @@
 import random
 
+phases = {1 : """
+
+
+
+
+
+_______""", 
+2 : """
+
+
+
+
+|
+|
+_______""",
+3 : """
+
+------
+|    
+|    
+|    
+|
+|
+_______""",
+4 : """
+------
+|    |
+|    O
+|    
+|
+|
+_______""",
+5 : """
+------
+|    |
+|    O
+|    |
+|
+|
+_______""",
+6 : """
+------
+|    |
+|    O
+|   /|\\
+|   / \\
+|
+_______"""}
+
+#function to choose the length of the word correctly - so gives error output if it's not integer or it's 0,1,2 because word would be to easy to guess
 def word_length_validation(prompt):
     while True:
         answer = input(prompt)
@@ -14,7 +64,27 @@ def word_length_validation(prompt):
         except ValueError:
             print(">Enter an integer number")
 
-def select_word(word_length):
+def validate_if_single(prompt):
+    while True:
+        letter = input(prompt)
+        if len(letter) == 1:
+            return letter
+        else:
+            print("")
+            print(">Type a single letter!")
+            print("")
+
+
+print(f""">Welcome to Hangman game. Program will choose the word and you have to figure out what is it letter by letter.
+>You can choose the difficulty by choosing the word length from 2-leter word up to 20-letter word.
+>In any case you make up to 5 mistakes. Each mistake will add the next part of hangman picture.
+            """)
+print("")
+
+#it will open the dictionary where each word is in a separate rows and convert it to a list of words
+#then pick all words of the given length into a separate list of specified_words and make a random choice from it
+while True:
+    word_length = word_length_validation(">Enter the number of the letters for the word: ")
     with open("hangman_test.txt", "r") as word_list:
         words = [line.strip() for line in word_list]
         specified_words = []
@@ -22,52 +92,47 @@ def select_word(word_length):
             if len(word) == word_length:
                 specified_words.append(word)
     if specified_words == []:
-        error_too_long = ">There are no words that long. Pick a smaller number of letters"
-        return error_too_long
+        print(">There are no words that long. Pick a smaller number of letters")
     else:
-        return random.choice(specified_words)
-
-print(f""">Welcome to Hangman game. Program will choose the word and you have to figure out what is it letter by letter.
->You can choose the difficulty by choosing the word length from 2-leter word up to 20-letter word.
->In cany case you make up to 5 mistakes. Each mistake will add the next part of hangman picture.
-            """)
+        chosen_word = random.choice(specified_words)
+        break
+print(f">You've chosen a {word_length}-letter word. Good luck!")
 print("")
 
-while True:
-    select_word_output = select_word(word_length_validation(">Enter the number of the letters for the word: "))
-    if select_word_output == ">There are no words that long. Pick a smaller number of letters":
-        print(select_word_output) #prints error_too_long
-    else:
-        break
-print(">Your word has been choosen:")
+print(f"FOR DEBUGGING: {chosen_word}") #FOR DEBUGGING
 
-print(f"FOR DEBUGGING: {select_word_output}") #FOR DEBUGGING
+obfuscated_word = ""
+for letter in chosen_word:
+    obfuscated_word += '_ '
+print(obfuscated_word)
+print("")
 
-letters_list = []
-for letter in select_word_output:
-    letters_list.append("_ ")
-hidden_word = ''.join(letters_list)
-print(f"""{hidden_word}
-      """)
-
-
-
-#Now to create the logic for guessing where for each guess the hidden word will be displayed and if guess is correct, the underscore(s) will be changed with the letter(s)
-#Next to add a condition that when the whole word is guessed the game is won
-#Next to add the guess counter, so if not guessed correctly it will subtract until the end of the game
-#Next to add graphical hangman to be displayed piece by piece with each wrong guess
-
-
+wrong_guesses_counter = 0
 guessed_letters = []
-guessed_letter = input("Make a guess: ")
-for letter in select_word_output:
-    if guessed_letter in select_word_output:
-        guessed_letters += guessed_letter
+display_word = ''
+while True:
+    guessed_letter = validate_if_single(">Guess the letter: ")
+    if guessed_letter in chosen_word:
+        if guessed_letter not in guessed_letters:
+            guessed_letters.append(guessed_letter)
     else:
-        guessed_letters += '_ '
-# for letter in select_word_output:
-#     if letter in guessed_letters:
-#         hidden_word = ''.join(guessed_letter)
-#     else:
-#         hidden_word = ''.join("_ ")
-print(guessed_letters)
+        wrong_guesses_counter += 1
+        print(">Wrong guess!")
+        print(phases[wrong_guesses_counter])
+        print('')
+    if wrong_guesses_counter == 6:
+        print(f'>Sorry to say, but you didn\'t make it! The word you were looking for was "{chosen_word}".')
+        break
+    for letter in chosen_word:
+        if letter in guessed_letters:
+            display_word += ''.join(f"{letter} ")
+        else:
+            display_word += ''.join("_ ")
+    print("")
+    print(f'Guessed: {display_word}')
+    print("")
+    if display_word.replace(" ", "") == chosen_word:
+        print(f'>Congrats! You guessed the word "{chosen_word}"! Incorrect guesses: {str(wrong_guesses_counter)}')
+        break
+    else:
+        display_word = ""
