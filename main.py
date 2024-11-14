@@ -1,5 +1,6 @@
 from guess_the_number import guess_the_number
 from rock_paper_scissors import rock_paper_scissors
+from hangman import hangman
 
 print("""
  _    _                                 _                                                 ___  
@@ -20,6 +21,7 @@ while True:
         0 - Close the program
         1 - Guess the number
         2 - Rock, paper, scissors
+        3 - Hangman
         """)
     game = input("I want to play a game number... ")
     if game == "0":
@@ -31,3 +33,6 @@ while True:
     elif game == "2":
         print("")
         rock_paper_scissors()
+    elif game == "3":
+        print("")
+        hangman()
